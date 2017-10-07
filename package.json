@@ -1,0 +1,31 @@
+{
+  "name": "zaraz",
+  "version": "0.0.0",
+  "description": "Cheap way to introduce short async delay.",
+  "author": {
+    "name": "Damian Krzeminski",
+    "email": "pirxpilot@furkot.com",
+    "url": "https://pirxpilot.me"
+  },
+  "repository": "pirxpilot/zaraz",
+  "license": "MIT",
+  "keywords": [
+    "zaraz",
+    "async",
+    "timer",
+    "delay"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "jshint": "^2.9.5",
+    "mocha": "^4.0.1",
+    "should": "^13.1.1"
+  },
+  "scripts": {
+    "test": "make check"
+  },
+  "files": [
+    "index.js",
+    "lib"
+  ]
+}
