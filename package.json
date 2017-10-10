@@ -15,7 +15,9 @@
     "timer",
     "delay"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "debug": "*"
+  },
   "devDependencies": {
     "jshint": "^2.9.5",
     "mocha": "^4.0.1",

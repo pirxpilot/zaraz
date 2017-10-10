@@ -78,4 +78,20 @@ describe('zaraz node module', function () {
     });
   });
 
+  it('must respect MAX_ITEMS', function(done) {
+    var r = '';
+    function fn(p) {
+      r += p;
+    }
+
+    zaraz.MAX_ITEMS = 2;
+    zaraz(fn, 'A');
+    zaraz(fn, 'B');
+    zaraz(fn, 'C');
+    zaraz(function() {
+      r.should.be.eql('ABC');
+      done();
+    });
+  });
+
 });
