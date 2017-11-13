@@ -1,6 +1,6 @@
 {
   "name": "zaraz",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Cheap way to introduce short async delay.",
   "author": {
     "name": "Damian Krzeminski",
