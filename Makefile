@@ -1,9 +1,11 @@
+NODE_BIN=./node_modules/.bin
+
 check: lint test
 
 lint:
-	./node_modules/.bin/jshint *.js lib test
+	$(NODE_BIN)/jshint *.js lib test
 
 test:
-	./node_modules/.bin/mocha --recursive --require should
+	$(NODE_BIN)/tape test/*js | $(NODE_BIN)/tap-dot
 
 .PHONY: check lint test

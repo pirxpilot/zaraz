@@ -1,97 +1,100 @@
-var zaraz = require('../');
+const test = require('tape');
+const zaraz = require('../');
 
-describe('zaraz node module', function () {
-  it('must call callback with params', function (done) {
+test('must call callback with params', function(t) {
 
-    zaraz(function(a, b) {
-      a.should.be.eql(5);
-      b.should.be.eql(-3);
-      done();
-    }, 5, -3);
+  t.plan(2);
+  zaraz(function(a, b) {
+    t.equal(a, 5);
+    t.equal(b, -3);
+  }, 5, -3);
+});
+
+test('must call callbacks in order', function(t) {
+  let r = '';
+  function fn(p) {
+    r += p;
+  }
+
+  t.plan(1);
+
+  zaraz(fn, 'A');
+  zaraz(fn, 'B');
+  zaraz(fn, 'C');
+  zaraz(function() {
+    t.equal(r, 'ABC');
   });
+});
 
-  it('must call callbacks in order', function(done) {
-    var r = '';
-    function fn(p) {
-      r += p;
-    }
+test('must allow to clear a callback', function(t) {
+  let r = '';
+  function fn(p) {
+    r += p;
+  }
 
-    zaraz(fn, 'A');
-    zaraz(fn, 'B');
-    zaraz(fn, 'C');
+  t.plan(1);
+
+  zaraz(fn, 'A');
+  const b = zaraz(fn, 'B');
+  zaraz(fn, 'C');
+  zaraz(function() {
+    t.equal(r, 'AC');
+  });
+  b.clear();
+});
+
+test('must allow for running a callback manually', function(t) {
+  let r = '';
+  function fn(p) {
+    r += p;
+  }
+
+  t.plan(1);
+
+  zaraz(fn, 'A');
+  const b = zaraz(fn, 'B');
+  zaraz(fn, 'C');
+  zaraz(function() {
+    t.equal(r, 'BAC');
+  });
+  b.run();
+});
+
+test('must pospone callbacks scheduled during callback', function(t) {
+  let r = '';
+  function fn(p) {
+    r += p;
+  }
+
+  t.plan(2);
+
+  zaraz(fn, 'A');
+  zaraz(function() {
+    fn('B');
+    zaraz(fn, 'D');
     zaraz(function() {
-      r.should.be.eql('ABC');
-      done();
+      t.equal(r, 'ABCD');
     });
   });
-
-  it('must allow to clear a callback', function(done) {
-    var r = '';
-    function fn(p) {
-      r += p;
-    }
-
-    zaraz(fn, 'A');
-    var b = zaraz(fn, 'B');
-    zaraz(fn, 'C');
-    zaraz(function() {
-      r.should.be.eql('AC');
-      done();
-    });
-    b.clear();
+  zaraz(fn, 'C');
+  zaraz(function() {
+    t.equal(r, 'ABC');
   });
+});
 
-  it('must allow for running a callback manually', function(done) {
-    var r = '';
-    function fn(p) {
-      r += p;
-    }
+test('must respect MAX_ITEMS', function(t) {
+  let r = '';
+  function fn(p) {
+    r += p;
+  }
 
-    zaraz(fn, 'A');
-    var b = zaraz(fn, 'B');
-    zaraz(fn, 'C');
-    zaraz(function() {
-      r.should.be.eql('BAC');
-      done();
-    });
-    b.run();
+  t.plan(1);
+
+  zaraz.MAX_ITEMS = 2;
+  zaraz(fn, 'A');
+  zaraz(fn, 'B');
+  zaraz(fn, 'C');
+  zaraz(function() {
+    t.equal(r, 'ABC');
   });
-
-  it('must pospone callbacks scheduled during callback', function(done) {
-    var r = '';
-    function fn(p) {
-      r += p;
-    }
-
-    zaraz(fn, 'A');
-    zaraz(function() {
-      fn('B');
-      zaraz(fn, 'D');
-      zaraz(function() {
-        r.should.be.eql('ABCD');
-        done();
-      });
-    });
-    zaraz(fn, 'C');
-    zaraz(function() {
-      r.should.be.eql('ABC');
-    });
-  });
-
-  it('must respect MAX_ITEMS', function(done) {
-    var r = '';
-    function fn(p) {
-      r += p;
-    }
-
-    zaraz.MAX_ITEMS = 2;
-    zaraz(fn, 'A');
-    zaraz(fn, 'B');
-    zaraz(fn, 'C');
-    zaraz(function() {
-      r.should.be.eql('ABC');
-      done();
-    });
-  });
-
 });
