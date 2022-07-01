@@ -21,7 +21,7 @@
   "devDependencies": {
     "jshint": "~2",
     "tap-dot": "~2",
-    "tape": "~4"
+    "tape": "~5"
   },
   "scripts": {
     "test": "make check"
