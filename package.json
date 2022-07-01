@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "jshint": "~2",
+    "requestidlecallback-polyfill": "^1.0.2",
     "tap-dot": "~2",
     "tape": "~5"
   },

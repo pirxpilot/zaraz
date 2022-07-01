@@ -10,5 +10,6 @@
   "sub": true,
   "undef": true,
   "unused": true,
+  "browserify": true,
   "esversion": 6
 }

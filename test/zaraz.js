@@ -1,4 +1,13 @@
 const test = require('tape');
+
+/* global globalThis */
+
+if (typeof requestIdleCallback !== 'function') {
+  globalThis.window = globalThis.window || {};
+  require('requestidlecallback-polyfill');
+  globalThis.requestIdleCallback = window.requestIdleCallback;
+}
+
 const zaraz = require('../');
 
 test('must call callback with params', function(t) {
