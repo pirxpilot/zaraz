@@ -53,7 +53,7 @@ MIT © [Damian Krzeminski](https://pirxpilot.me)
 [npm-url]: https://npmjs.org/package/zaraz
 
 [build-url]: https://github.com/pirxpilot/zaraz/actions/workflows/check.yaml
-[build-image]: https://img.shields.io/github/workflow/status/pirxpilot/zaraz/check
+[build-image]: https://img.shields.io/github/actions/workflow/status/pirxpilot/zaraz/check.yaml?branch=main
 
 [deps-image]: https://img.shields.io/librariesio/release/npm/zaraz
 [deps-url]: https://libraries.io/npm/zaraz
