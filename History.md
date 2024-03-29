@@ -1,4 +1,11 @@
 
+1.0.0 / 2024-03-29
+==================
+
+ * upgrade github actions
+ * replace tape with node:test
+ * replace jshint with @pirxpilot/jshint
+
 0.0.2 / 2019-04-01
 ==================
 
