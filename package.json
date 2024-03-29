@@ -19,9 +19,7 @@
     "debug": "*"
   },
   "devDependencies": {
-    "@pirxpilot/jshint": "~3",
-    "tap-dot": "~2",
-    "tape": "~5"
+    "@pirxpilot/jshint": "~3"
   },
   "scripts": {
     "test": "make check"

@@ -1,100 +1,103 @@
-const test = require('tape');
+const test = require('node:test');
+const assert = require('node:assert/strict');
+
 const zaraz = require('../');
 
-test('must call callback with params', function(t) {
+test('must call callback with params', function (_, done) {
 
-  t.plan(2);
-  zaraz(function(a, b) {
-    t.equal(a, 5);
-    t.equal(b, -3);
+  zaraz(function (a, b) {
+    assert.equal(a, 5);
+    assert.equal(b, -3);
+    done();
   }, 5, -3);
 });
 
-test('must call callbacks in order', function(t) {
+test('must call callbacks in order', function (_, done) {
   let r = '';
+
   function fn(p) {
     r += p;
   }
-
-  t.plan(1);
 
   zaraz(fn, 'A');
   zaraz(fn, 'B');
   zaraz(fn, 'C');
-  zaraz(function() {
-    t.equal(r, 'ABC');
+  zaraz(function () {
+    assert.equal(r, 'ABC');
+    done();
   });
 });
 
-test('must allow to clear a callback', function(t) {
+test('must allow to clear a callback', function (_, done) {
   let r = '';
+
   function fn(p) {
     r += p;
   }
 
-  t.plan(1);
 
   zaraz(fn, 'A');
   const b = zaraz(fn, 'B');
   zaraz(fn, 'C');
-  zaraz(function() {
-    t.equal(r, 'AC');
+  zaraz(function () {
+    assert.equal(r, 'AC');
+    done();
   });
   b.clear();
 });
 
-test('must allow for running a callback manually', function(t) {
+test('must allow for running a callback manually', function (_, done) {
   let r = '';
+
   function fn(p) {
     r += p;
   }
-
-  t.plan(1);
 
   zaraz(fn, 'A');
   const b = zaraz(fn, 'B');
   zaraz(fn, 'C');
-  zaraz(function() {
-    t.equal(r, 'BAC');
+  zaraz(function () {
+    assert.equal(r, 'BAC');
+    done();
   });
   b.run();
 });
 
-test('must pospone callbacks scheduled during callback', function(t) {
+test('must postpone callbacks scheduled during callback', function (_, done) {
   let r = '';
+
   function fn(p) {
     r += p;
   }
 
-  t.plan(2);
-
   zaraz(fn, 'A');
-  zaraz(function() {
+  zaraz(function () {
     fn('B');
     zaraz(fn, 'D');
-    zaraz(function() {
-      t.equal(r, 'ABCD');
+    zaraz(function () {
+      assert.equal(r, 'ABCD');
     });
   });
   zaraz(fn, 'C');
-  zaraz(function() {
-    t.equal(r, 'ABC');
+  zaraz(function () {
+    assert.equal(r, 'ABC');
+    done();
   });
 });
 
-test('must respect MAX_ITEMS', function(t) {
+test('must respect MAX_ITEMS', function (_, done) {
   let r = '';
+
   function fn(p) {
     r += p;
   }
-
-  t.plan(1);
 
   zaraz.MAX_ITEMS = 2;
   zaraz(fn, 'A');
   zaraz(fn, 'B');
   zaraz(fn, 'C');
-  zaraz(function() {
-    t.equal(r, 'ABC');
+  zaraz(function () {
+    assert.equal(r, 'ABC');
+    done();
   });
 });

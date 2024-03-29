@@ -6,6 +6,6 @@ lint:
 	$(NODE_BIN)/jshint *.js lib test
 
 test:
-	$(NODE_BIN)/tape test/*js | $(NODE_BIN)/tap-dot
+	node --test
 
 .PHONY: check lint test
