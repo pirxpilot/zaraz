@@ -1,7 +1,6 @@
-const test = require('node:test');
-const assert = require('node:assert/strict');
-
-const zaraz = require('../');
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import zaraz from '../lib/zaraz.js';
 
 test('must call callback with params', function (_, done) {
   zaraz(
