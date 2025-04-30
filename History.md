@@ -1,4 +1,11 @@
 
+2.0.0 / 2025-04-30
+==================
+
+ * rewrite Item as a class
+ * transition to ESM format
+ * use `biome` as a linter and formatter
+
 1.0.0 / 2024-03-29
 ==================
 
