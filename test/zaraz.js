@@ -1,15 +1,17 @@
-const test = require('node:test');
-const assert = require('node:assert/strict');
-
-const zaraz = require('../');
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import zaraz from '../lib/zaraz.js';
 
 test('must call callback with params', function (_, done) {
-
-  zaraz(function (a, b) {
-    assert.equal(a, 5);
-    assert.equal(b, -3);
-    done();
-  }, 5, -3);
+  zaraz(
+    function (a, b) {
+      assert.equal(a, 5);
+      assert.equal(b, -3);
+      done();
+    },
+    5,
+    -3
+  );
 });
 
 test('must call callbacks in order', function (_, done) {
@@ -34,7 +36,6 @@ test('must allow to clear a callback', function (_, done) {
   function fn(p) {
     r += p;
   }
-
 
   zaraz(fn, 'A');
   const b = zaraz(fn, 'B');

@@ -1,11 +1,15 @@
-NODE_BIN=./node_modules/.bin
-
 check: lint test
 
 lint:
-	$(NODE_BIN)/jshint *.js lib test
+	./node_modules/.bin/biome ci
+
+format:
+	./node_modules/.bin/biome check --fix
 
 test:
-	node --test
+	node --test $(TEST_OPTS)
 
-.PHONY: check lint test
+test-cov: TEST_OPTS := --experimental-test-coverage
+test-cov: test
+
+.PHONY: check format lint test test-cov
