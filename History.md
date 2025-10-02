@@ -1,4 +1,11 @@
 
+2.0.1 / 2025-10-02
+==================
+
+ * update github actions
+ * upgrade biome to 2.2.5
+ * remove `index.js` from `package.files`
+
 2.0.0 / 2025-04-30
 ==================
 
