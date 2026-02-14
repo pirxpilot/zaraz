@@ -1,6 +1,6 @@
 {
   "name": "zaraz",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Cheap way to introduce short async delay.",
   "type": "module",
   "exports": "./lib/zaraz.js",
